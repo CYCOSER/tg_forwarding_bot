@@ -56,7 +56,7 @@ You'll be prompted to enter:
 Restart main.py
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 You will be prompted to log into Telegram accout that will forward the posts
@@ -67,7 +67,7 @@ You will be prompted to log into Telegram accout that will forward the posts
 Start the bot:
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 To add a channel to the forwarding list, simply forward any message from that channel to the bot.
