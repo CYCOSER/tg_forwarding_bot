@@ -25,6 +25,8 @@ Download and install Python 3.11+ from:
 
 ```bash
 git clone https://github.com/CYCOSER/tg_forwarding_bot
+```
+```bash
 cd tg_forwarding_bot
 ```
 
