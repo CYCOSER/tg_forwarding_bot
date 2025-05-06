@@ -24,8 +24,8 @@ Download and install Python 3.11+ from:
 ### 2. Clone the repository
 
 ```bash
-git clone 
-cd forward-bot https://github.com/CYCOSER/tg_forwarding_bot
+git clone https://github.com/CYCOSER/tg_forwarding_bot
+cd tg_forwarding_bot
 ```
 
 ### 3. Install dependencies
