@@ -11,14 +11,14 @@ A Telegram bot built with **Pyrogram** that automatically forwards messages from
 
 ## 🛠 Requirements
 
-- Python 3.11 or newer
+- Python 3.11 or higher
 - Telegram API credentials: `API_ID`, `API_HASH`, `BOT_TOKEN`
 - Dependencies listed in `requirements.txt`
 
 ## 📦 Installation
 
 ### 1. Install Python  
-Download and install Python 3.11+ from:  
+Download and install Python 3.11 or higher from:  
 👉 [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
 ### 2. Clone the repository
