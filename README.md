@@ -57,7 +57,7 @@ Restart main.py
 python main.py
 ```
 
-You will be prompted to log into Telegram admin accout that will forward the posts
+You will be prompted to log into Telegram accout that will forward the posts
 
 
 ## ▶️ Usage
