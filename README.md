@@ -41,7 +41,7 @@ pip install -r requirements.txt
 Run program for the first time:
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 You'll be prompted to enter:
