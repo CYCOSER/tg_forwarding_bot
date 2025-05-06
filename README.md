@@ -1,6 +1,6 @@
 # 📬 Telegram Forwarding Bot
 
-A Telegram bot built with **Pyrogram** that automatically forwards messages from multiple channels or chats to a single one.
+A Telegram bot built with **Pyrogram** that automatically forwards messages from multiple channels or chats into a single one.
 
 ## 🚀 Features
 
