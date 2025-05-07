@@ -70,4 +70,4 @@ Start the bot:
 python3 main.py
 ```
 
-To add a channel to the forwarding list, simply forward any message from that channel to the bot.
+To add or delete a channel from the forwarding list, simply forward any message from that channel to the bot.
