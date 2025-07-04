@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    volumes:
+      - ./config.json:/app/config.json
+      - ./admin_list.json:/app/admin_list.json
+    restart: always
