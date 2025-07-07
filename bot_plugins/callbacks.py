@@ -14,7 +14,8 @@ async def callback_handler(client, callback_query):
         await callback_query.message.edit_text(start_text)
 
     if data.startswith("add_channel_fwd"):
-        channel_id = data[16:]
+        channel_id = data[16:30]
+        channel_name = data[30:]
 
         with open("config.json", "r") as f:
             jdata = json.load(f)
@@ -29,7 +30,7 @@ async def callback_handler(client, callback_query):
                         [
                             InlineKeyboardButton(
                                 text="Удалить канал",
-                                callback_data=f"delete_channel_fwd {channel_id}"
+                                callback_data=f"delete_channel_fwd {channel_id} {channel_name}",
                             )
                         ],
                         [
@@ -44,6 +45,7 @@ async def callback_handler(client, callback_query):
         else:
             jdata.append({
                 "CHAT_ID": channel_id,
+                "CHAT_NAME": channel_name,
                 "LAST_POST_TIME": time.time()
             })
             with open("config.json", "w") as f:
@@ -52,7 +54,8 @@ async def callback_handler(client, callback_query):
             await callback_query.message.edit_text(start_text)
 
     if data.startswith("delete_channel_fwd"):
-        channel_id = data[19:]
+        channel_id = data[19:33]
+        channel_name = data[33:]
 
         with open("config.json", "r") as f:
             jdata = json.load(f)
@@ -77,7 +80,7 @@ async def callback_handler(client, callback_query):
                         [
                             InlineKeyboardButton(
                                 text="Добавить канал",
-                                callback_data=f"add_channel_fwd {channel_id}"
+                                callback_data=f"add_channel_fwd {channel_id} {channel_name}"
                             )
                         ],
                         [

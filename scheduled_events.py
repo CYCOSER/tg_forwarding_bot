@@ -19,12 +19,16 @@ async def scheduled_fwd(userbot):
         for post in reversed(post_list):
             post_time = post.date.timestamp()
             if post_time > last_time:
-                await userbot.forward_messages(
+                try:
+                    await userbot.forward_messages(
                     chat_id=main_chat_id,
                     from_chat_id=chat_id,
                     message_ids=post.id
-                )
-                new_last_time = max(new_last_time, post_time)
+                    )
+                    new_last_time = max(new_last_time, post_time)
+
+                except:
+                    print(f"There are troubles with forwarding from {userbot.get_chat(chat_id).title}{chat_id}")
 
         entry["LAST_POST_TIME"] = new_last_time
 

@@ -18,6 +18,22 @@ async def start(client, cmd):
             await cmd.reply_text(text=no_permission_text)
 
 
+@Client.on_message(filters.command("list") & filters.private)
+async def fwdLsit(client, cmd):
+    with open("admin_list.json", "r") as f:
+        admin_data = json.load(f)
+        if cmd.from_user.id in [i["id"] for i in admin_data]:
+            with open("config.json", "r") as f:
+                data = json.load(f)
+                if len(data) <= 1:
+                    await cmd.reply_text(text="Похоже, что список пуст 🧐")
+                else:
+                    await cmd.reply_text(text='\n'.join([await client.get_chat(i["CHAT_ID"]).title for i in data[1:]]))
+
+        else:
+            await cmd.reply_text(text=no_permission_text)
+
+
 @Client.on_message(filters.forwarded)
 async def forwarded_handler(client, message):
     with open("admin_list.json", "r") as f:
@@ -34,6 +50,7 @@ async def forwarded_handler(client, message):
 
             if message.forward_from_chat:
                 channel_id = message.forward_from_chat.id
+                channel_name = message.forward_from_chat.title
                 await message.reply_text(
                     text="📑 Вы хотели бы добавить этот канал в список, или удалить?",
                     disable_web_page_preview=True,
@@ -42,11 +59,11 @@ async def forwarded_handler(client, message):
                             [
                                 InlineKeyboardButton(
                                     text="➕ Добавить канал",
-                                    callback_data=f"add_channel_fwd {channel_id}",
+                                    callback_data=f"add_channel_fwd {channel_id} {channel_name}",
                                 ),
                                 InlineKeyboardButton(
                                     text="➖ Удалить канал",
-                                    callback_data=f"delete_channel_fwd {channel_id}",
+                                    callback_data=f"delete_channel_fwd {channel_id} {channel_name}",
                                 )
                             ],
                             [
