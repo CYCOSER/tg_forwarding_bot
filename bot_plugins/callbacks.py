@@ -1,5 +1,6 @@
 import time
 
+from clipf import clipSpace64
 from pyrogram import Client
 from bot_contents.texts import start_text, already_in_queue, not_in_queue
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -30,7 +31,7 @@ async def callback_handler(client, callback_query):
                         [
                             InlineKeyboardButton(
                                 text="Удалить канал",
-                                callback_data=f"dcf{channel_id}{channel_name}",
+                                callback_data=clipSpace64(f"dcf{channel_id}{channel_name}"),
                             )
                         ],
                         [
@@ -48,7 +49,7 @@ async def callback_handler(client, callback_query):
                 "CHAT_NAME": channel_name,
                 "LAST_POST_TIME": time.time()
             })
-            with open("config.json", "w") as f:
+            with open("config.json", "w", encoding="utf-8") as f:
                 json.dump(jdata, f, ensure_ascii=False, indent=4)
             await callback_query.answer("✔️ Канал был успешно добавлен в очередь!")
             await callback_query.message.edit_text(start_text)
@@ -67,7 +68,7 @@ async def callback_handler(client, callback_query):
 
         if index_to_remove is not None:
             jdata.pop(index_to_remove)
-            with open("config.json", "w") as f:
+            with open("config.json", "w", encoding="utf-8") as f:
                 json.dump(jdata, f, ensure_ascii=False, indent=4)
             await callback_query.answer("✔️ Канал был успешно удален из очереди!")
             await callback_query.message.edit_text(start_text)
@@ -80,7 +81,7 @@ async def callback_handler(client, callback_query):
                         [
                             InlineKeyboardButton(
                                 text="Добавить канал",
-                                callback_data=f"acf{channel_id}{channel_name}"
+                                callback_data=clipSpace64(f"acf{channel_id}{channel_name}")
                             )
                         ],
                         [

@@ -4,7 +4,7 @@ from pyrogram.enums import ChatMembersFilter
 
 
 async def scheduled_fwd(userbot):
-    with open("config.json", "r") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
     main_chat_id = data[0]["MAIN_CHAT_ID"]
@@ -32,11 +32,11 @@ async def scheduled_fwd(userbot):
 
         entry["LAST_POST_TIME"] = new_last_time
 
-    with open("config.json", "w") as f:
-        json.dump(data, f, indent=4)
+    with open("config.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
 
 async def admin_list_update(userbot):
-    with open('config.json', 'r') as f:
+    with open('config.json', 'r', encoding="utf-8") as f:
         admin_list = []
         data = json.load(f)
         async for member in userbot.get_chat_members(
@@ -48,11 +48,11 @@ async def admin_list_update(userbot):
                 "username": member.user.username
             })
 
-        with open("admin_list.json", "r") as af:
+        with open("admin_list.json", "r", encoding="utf-8") as af:
             admin_data = json.load(af)
             if admin_data == admin_list:
                 return
 
-        with open("admin_list.json", "w") as af:
-            json.dump(admin_list, af, indent=4)
+        with open("admin_list.json", "w", encoding="utf-8") as af:
+            json.dump(admin_list, af, ensure_ascii=False, indent=4)
 

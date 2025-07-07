@@ -8,7 +8,7 @@ from pyrogram import Client, idle
 
 async def main():
     try:
-        with open('config.json', 'r') as f:
+        with open('config.json', 'r', encoding="utf-8") as f:
             data = json.load(f)
             userbot = Client(
                 name="userbot",
