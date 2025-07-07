@@ -19,7 +19,7 @@ async def start(client, cmd):
 
 
 @Client.on_message(filters.command("list") & filters.private)
-async def fwdLsit(client, cmd):
+async def fwdList(client, cmd):
     with open("admin_list.json", "r") as f:
         admin_data = json.load(f)
         if cmd.from_user.id in [i["id"] for i in admin_data]:
@@ -51,6 +51,7 @@ async def forwarded_handler(client, message):
             if message.forward_from_chat:
                 channel_id = message.forward_from_chat.id
                 channel_name = message.forward_from_chat.title
+                print(channel_name)
                 await message.reply_text(
                     text="📑 Вы хотели бы добавить этот канал в список, или удалить?",
                     disable_web_page_preview=True,
@@ -59,11 +60,11 @@ async def forwarded_handler(client, message):
                             [
                                 InlineKeyboardButton(
                                     text="➕ Добавить канал",
-                                    callback_data=f"add_channel_fwd {channel_id} {channel_name}",
+                                    callback_data=f"acf{channel_id}{channel_name}",
                                 ),
                                 InlineKeyboardButton(
                                     text="➖ Удалить канал",
-                                    callback_data=f"delete_channel_fwd {channel_id} {channel_name}",
+                                    callback_data=f"dcf{channel_id}{channel_name}",
                                 )
                             ],
                             [

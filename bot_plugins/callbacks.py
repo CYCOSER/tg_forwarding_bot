@@ -13,11 +13,11 @@ async def callback_handler(client, callback_query):
     if data == "back":
         await callback_query.message.edit_text(start_text)
 
-    if data.startswith("add_channel_fwd"):
-        channel_id = data[16:30]
-        channel_name = data[30:]
+    if data.startswith("acf"):
+        channel_id = data[3:17]
+        channel_name = data[17:]
 
-        with open("config.json", "r") as f:
+        with open("config.json", "r", encoding="utf-8") as f:
             jdata = json.load(f)
 
         already_exists = any(item.get("CHAT_ID") == channel_id for item in jdata)
@@ -30,7 +30,7 @@ async def callback_handler(client, callback_query):
                         [
                             InlineKeyboardButton(
                                 text="Удалить канал",
-                                callback_data=f"delete_channel_fwd {channel_id} {channel_name}",
+                                callback_data=f"dcf{channel_id}{channel_name}",
                             )
                         ],
                         [
@@ -49,15 +49,15 @@ async def callback_handler(client, callback_query):
                 "LAST_POST_TIME": time.time()
             })
             with open("config.json", "w") as f:
-                json.dump(jdata, f, indent=4)
+                json.dump(jdata, f, ensure_ascii=False, indent=4)
             await callback_query.answer("✔️ Канал был успешно добавлен в очередь!")
             await callback_query.message.edit_text(start_text)
 
-    if data.startswith("delete_channel_fwd"):
-        channel_id = data[19:33]
-        channel_name = data[33:]
+    if data.startswith("dcf"):
+        channel_id = data[4:17]
+        channel_name = data[17:]
 
-        with open("config.json", "r") as f:
+        with open("config.json", "r", encoding="utf-8") as f:
             jdata = json.load(f)
 
         index_to_remove = next(
@@ -68,7 +68,7 @@ async def callback_handler(client, callback_query):
         if index_to_remove is not None:
             jdata.pop(index_to_remove)
             with open("config.json", "w") as f:
-                json.dump(jdata, f, indent=4)
+                json.dump(jdata, f, ensure_ascii=False, indent=4)
             await callback_query.answer("✔️ Канал был успешно удален из очереди!")
             await callback_query.message.edit_text(start_text)
 
@@ -80,7 +80,7 @@ async def callback_handler(client, callback_query):
                         [
                             InlineKeyboardButton(
                                 text="Добавить канал",
-                                callback_data=f"add_channel_fwd {channel_id} {channel_name}"
+                                callback_data=f"acf{channel_id}{channel_name}"
                             )
                         ],
                         [
