@@ -10,6 +10,7 @@ def clip64(text: str) -> str:
 
     return text
 
+
 def clipSpace64(text: str, max_bytes: int = 64) -> str:
     words = text.split()
     result = ""

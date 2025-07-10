@@ -95,5 +95,5 @@ async def forwarded_handler(client, message):
             print("Error in forwarded_handler function")
 
 async def remove_from_cache(group_id):
-    await asyncio.sleep(30)
+    await asyncio.sleep(5)
     handled_groups.discard(group_id)

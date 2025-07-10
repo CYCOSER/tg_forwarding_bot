@@ -21,9 +21,8 @@ async def callback_handler(client, callback_query):
         with open("config.json", "r", encoding="utf-8") as f:
             jdata = json.load(f)
 
-        already_exists = any(item.get("CHAT_ID") == channel_id for item in jdata)
 
-        if already_exists:
+        if any(item.get("CHAT_ID") == channel_id for item in jdata):
             await callback_query.message.edit_text(
                 text=already_in_queue,
                 reply_markup=InlineKeyboardMarkup(
@@ -43,6 +42,7 @@ async def callback_handler(client, callback_query):
                     ]
                 )
             )
+
         else:
             jdata.append({
                 "CHAT_ID": channel_id,
@@ -55,7 +55,7 @@ async def callback_handler(client, callback_query):
             await callback_query.message.edit_text(start_text)
 
     if data.startswith("dcf"):
-        channel_id = data[4:17]
+        channel_id = data[3:17]
         channel_name = data[17:]
 
         with open("config.json", "r", encoding="utf-8") as f:
