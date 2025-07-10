@@ -43,7 +43,7 @@ async def fwdList(client, cmd):
             print("Error in fwdlist function")
 
 
-@Client.on_message(filters.forwarded)
+@Client.on_message(filters.forwarded & filters.private)
 async def forwarded_handler(client, message):
     with open("admin_list.json", "r", encoding="utf-8") as f:
         admin_data = json.load(f)
